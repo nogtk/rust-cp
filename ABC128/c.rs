@@ -51,30 +51,13 @@ impl<T> LexicalPermutation for [T] where T: Ord {
   }
 }
 fn main() {
-  let (n, a, b) = {
-    let tmp: Vec<u64> = read_vec();
-    (tmp[0], tmp[1], tmp[2])
+  let(n, m) = {
+    let tmp: Vec<usize> = read_vec();
+    (tmp[0], tmp[1])
   };
 
-  let mut factorial_table: Vec<u64> = Vec::new();
-  factorial_table.push(1);
+  let sk: Vec<Vec<usize>> = read_vec2(m as u32);
 
-  for i in 0..n {
-    if i == 0 {
-      factorial_table.push(1);
-    } else {
-      let tmp = factorial_table[i as usize];
-      factorial_table.push((tmp * (i+1)));
-    }
-  }
-
-  let mut sum: u64 = 0;
-  for i in 1..n+1 {
-    if i == a || i == b { continue; }
-    sum += factorial_table[n as usize]/(factorial_table[i as usize]*factorial_table[(n-i) as usize]);
-  }
-
-  sum = sum % 1000000007;
-
-  println!("{}", sum);
+  let p: Vec<usize> = read_vec();
+  
 }
