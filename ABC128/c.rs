@@ -56,8 +56,36 @@ fn main() {
     (tmp[0], tmp[1])
   };
 
-  let sk: Vec<Vec<usize>> = read_vec2(m as u32);
+  let mut a = vec![0; n];
 
-  let p: Vec<usize> = read_vec();
-  
+  for i in 0..m {
+    let mut sw: Vec<usize> = read_vec();
+    sw.remove(0);
+    for s in sw {
+      a[s-1] |= (1 << i);
+    }
+  }
+
+
+  let mut p = 0;
+
+  let mut p_vec: Vec<usize> = read_vec();
+  for i in 0..m {
+    p |= (p_vec[i] << i);
+  }
+
+  let mut count = 0;
+
+  for bit in 0..(1<<n) {
+    let mut t = 0;
+    for i in 0..n {
+      if bit & (1 << i) != 0 {
+        t ^= a[i];
+      }
+    }
+
+    if t == p { count += 1; }
+  }
+
+  println!("{}", count);
 }
